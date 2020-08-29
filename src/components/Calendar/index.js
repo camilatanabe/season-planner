@@ -13,6 +13,10 @@ const Calendar = () => {
     setCurrentDate(dateFns.subMonths(currentDate, 1))
   }
 
+  const onDateClick = day => {
+    setSelectedDate(day)
+  }
+
   const header = () => {
     const dateFormat = 'MMMM yyyy'
     return (
@@ -37,7 +41,7 @@ const Calendar = () => {
   const daysOfWeek = () => {
     const dateFormat = 'EEEE'
     const days = []
-    let startDate = dateFns.startOfWeek(currentDate)
+    const startDate = dateFns.startOfWeek(currentDate)
     for (let i = 0; i < 7; i++) {
       days.push(
         <div className="column col-center" key={i}>
@@ -47,11 +51,55 @@ const Calendar = () => {
     }
     return <div className="days row">{days}</div>
   }
+
+  const cells = () => {
+    const monthStart = dateFns.startOfMonth(currentDate)
+    const monthEnd = dateFns.endOfMonth(monthStart)
+    const startDate = dateFns.startOfWeek(monthStart)
+    const endDate = dateFns.endOfWeek(monthEnd)
+    const dateFormat = 'd'
+    const rows = []
+    let days = []
+    let day = startDate
+    let formattedDate = ''
+    while (day <= endDate) {
+      for (let i = 0; i < 7; i++) {
+        formattedDate = dateFns.format(day, dateFormat)
+        const cloneDay = day
+        console.log('cloneDay: ', cloneDay)
+        days.push(
+          <div
+            className={`column cell ${
+              !dateFns.isSameMonth(day, monthStart)
+                ? 'disabled'
+                : dateFns.isSameDay(day, selectedDate)
+                ? 'selected'
+                : ''
+            }`}
+            key={day}
+            onClick={() => onDateClick(dateFns.toDate(cloneDay))}
+          >
+            <span className="number">{formattedDate}</span>
+            <span className="bg">{formattedDate}</span>
+          </div>
+        )
+        day = dateFns.addDays(day, 1)
+      }
+      rows.push(
+        <div className="row" key={day}>
+          {days}
+        </div>
+      )
+      days = []
+    }
+    return <div className="body">{rows}</div>
+  }
   console.log('entra aqui')
   return (
     <div className="calendar">
       <div>{header()}</div>
       <div>{daysOfWeek()}</div>
+      <div>{cells()}</div>
     </div>
   )
 }
