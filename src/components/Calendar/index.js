@@ -1,5 +1,15 @@
 import React, { useState } from 'react'
 import * as dateFns from 'date-fns'
+import {
+  CalendarContainer,
+  CalendarHeaderContainer,
+  CalendarWeekDaysColumn,
+  CalendarWeekDaysRow,
+  CalendarDaysRow,
+  CalendarColumnCell,
+  NumberCell,
+  BgCell
+} from './styles.js'
 import './styles.css'
 
 const Calendar = () => {
@@ -20,7 +30,7 @@ const Calendar = () => {
   const header = () => {
     const dateFormat = 'MMMM yyyy'
     return (
-      <div className="header row flex-middle">
+      <CalendarHeaderContainer>
         <div className="column col-start">
           <div className="icon" onClick={prevMonth}>
             chevron_left
@@ -34,7 +44,7 @@ const Calendar = () => {
             chevron_right
           </div>
         </div>
-      </div>
+      </CalendarHeaderContainer>
     )
   }
 
@@ -44,12 +54,12 @@ const Calendar = () => {
     const startDate = dateFns.startOfWeek(currentDate)
     for (let i = 0; i < 7; i++) {
       days.push(
-        <div className="column col-center" key={i}>
+        <CalendarWeekDaysColumn key={i}>
           {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
-        </div>
+        </CalendarWeekDaysColumn>
       )
     }
-    return <div className="days row">{days}</div>
+    return <CalendarWeekDaysRow>{days}</CalendarWeekDaysRow>
   }
 
   const cells = () => {
@@ -62,45 +72,39 @@ const Calendar = () => {
     let days = []
     let day = startDate
     let formattedDate = ''
+
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
         formattedDate = dateFns.format(day, dateFormat)
         const cloneDay = day
+        const isDisabled = !dateFns.isSameMonth(day, monthStart)
+        const isSelected = dateFns.isSameDay(day, selectedDate)
         console.log('cloneDay: ', cloneDay)
         days.push(
-          <div
-            className={`column cell ${
-              !dateFns.isSameMonth(day, monthStart)
-                ? 'disabled'
-                : dateFns.isSameDay(day, selectedDate)
-                ? 'selected'
-                : ''
-            }`}
+          <CalendarColumnCell
+            disabled={isDisabled}
+            selected={isSelected}
             key={day}
             onClick={() => onDateClick(dateFns.toDate(cloneDay))}
           >
-            <span className="number">{formattedDate}</span>
-            <span className="bg">{formattedDate}</span>
-          </div>
+            <NumberCell selected={isSelected}>{formattedDate}</NumberCell>
+            <BgCell selected={isSelected}>{formattedDate}</BgCell>
+          </CalendarColumnCell>
         )
         day = dateFns.addDays(day, 1)
       }
-      rows.push(
-        <div className="row" key={day}>
-          {days}
-        </div>
-      )
+      rows.push(<CalendarDaysRow key={day}>{days}</CalendarDaysRow>)
       days = []
     }
     return <div className="body">{rows}</div>
   }
   console.log('entra aqui')
   return (
-    <div className="calendar">
+    <CalendarContainer>
       <div>{header()}</div>
       <div>{daysOfWeek()}</div>
       <div>{cells()}</div>
-    </div>
+    </CalendarContainer>
   )
 }
 
