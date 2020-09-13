@@ -1,4 +1,8 @@
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
+
+export const CalendarGlobalStyle = createGlobalStyle`
+*{box-sizing: border-box;}
+`
 
 export const CalendarContainer = styled.div`
   display: block;
@@ -58,7 +62,7 @@ export const CalendarDaysRow = styled.div`
   }
 `
 
-export const CalendarColumnCell = styled.div`
+export const CalendarDaysColumn = styled.div`
   flex-grow: 1;
   flex-basis: 0;
   max-width: 100%;
@@ -85,6 +89,15 @@ export const CalendarColumnCell = styled.div`
     background: whitesmoke;
     transition: 0.5s ease-out;
   }
+`
+
+export const CalendarBody = styled.div`
+  font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 1.5;
+  position: relative;
+  box-sizing: border-box;
 `
 
 export const NumberCell = styled.span`

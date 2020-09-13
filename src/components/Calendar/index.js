@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 import * as dateFns from 'date-fns'
 import {
+  CalendarGlobalStyle,
   CalendarContainer,
   CalendarHeaderContainer,
   CalendarMonthName,
   CalendarWeekDaysColumn,
   CalendarWeekDaysRow,
   CalendarDaysRow,
-  CalendarColumnCell,
+  CalendarDaysColumn,
+  CalendarBody,
   NumberCell,
   BgCell
 } from './styles.js'
-import './styles.css'
 import { ChevronRight, ChevronLeft } from '@styled-icons/fa-solid'
 
 const Calendar = () => {
@@ -79,7 +80,7 @@ const Calendar = () => {
         const isSelected = dateFns.isSameDay(day, selectedDate)
         console.log('cloneDay: ', cloneDay)
         days.push(
-          <CalendarColumnCell
+          <CalendarDaysColumn
             disabled={isDisabled}
             selected={isSelected}
             key={day}
@@ -87,22 +88,25 @@ const Calendar = () => {
           >
             <NumberCell selected={isSelected}>{formattedDate}</NumberCell>
             <BgCell selected={isSelected}>{formattedDate}</BgCell>
-          </CalendarColumnCell>
+          </CalendarDaysColumn>
         )
         day = dateFns.addDays(day, 1)
       }
       rows.push(<CalendarDaysRow key={day}>{days}</CalendarDaysRow>)
       days = []
     }
-    return <div className="body">{rows}</div>
+    return <CalendarBody>{rows}</CalendarBody>
   }
   console.log('entra aqui')
   return (
-    <CalendarContainer>
-      <div>{header()}</div>
-      <div>{daysOfWeek()}</div>
-      <div>{cells()}</div>
-    </CalendarContainer>
+    <React.Fragment>
+      <CalendarGlobalStyle />
+      <CalendarContainer>
+        <div>{header()}</div>
+        <div>{daysOfWeek()}</div>
+        <div>{cells()}</div>
+      </CalendarContainer>
+    </React.Fragment>
   )
 }
 
