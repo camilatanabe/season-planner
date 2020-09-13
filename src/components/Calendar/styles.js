@@ -16,6 +16,13 @@ export const CalendarHeaderContainer = styled.div`
   padding: 1.75em 0;
   border-bottom: 1px solid lightgray;
   background: white;
+  justify-content: space-around;
+`
+
+export const CalendarMonthName = styled.span`
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 115%;
 `
 
 export const CalendarWeekDaysRow = styled.div`
@@ -26,7 +33,6 @@ export const CalendarWeekDaysRow = styled.div`
   padding: 0.75em 0;
   border-bottom: 1px solid lightgray;
   margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -79,18 +85,6 @@ export const CalendarColumnCell = styled.div`
     background: whitesmoke;
     transition: 0.5s ease-out;
   }
-`
-
-export const StyledColumn = styled.div`
-  flex-grow: 1;
-  flex-basis: 0;
-  max-width: 100%;
-  text-transform: uppercase;
-  font-weight: 400;
-  color: gray;
-  font-size: 70%;
-  padding: 0.75em 0;
-  border-bottom: 1px solid lightgray;
 `
 
 export const NumberCell = styled.span`

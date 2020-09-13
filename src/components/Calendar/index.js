@@ -3,6 +3,7 @@ import * as dateFns from 'date-fns'
 import {
   CalendarContainer,
   CalendarHeaderContainer,
+  CalendarMonthName,
   CalendarWeekDaysColumn,
   CalendarWeekDaysRow,
   CalendarDaysRow,
@@ -11,6 +12,7 @@ import {
   BgCell
 } from './styles.js'
 import './styles.css'
+import { ChevronRight, ChevronLeft } from '@styled-icons/fa-solid'
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -31,18 +33,14 @@ const Calendar = () => {
     const dateFormat = 'MMMM yyyy'
     return (
       <CalendarHeaderContainer>
-        <div className="column col-start">
-          <div className="icon" onClick={prevMonth}>
-            chevron_left
-          </div>
+        <div onClick={prevMonth}>
+          <ChevronLeft size="12" />
         </div>
-        <div className="column col-center">
-          <span>{dateFns.format(currentDate, dateFormat)}</span>
-        </div>
-        <div className="column col-end">
-          <div className="icon" onClick={nextMonth}>
-            chevron_right
-          </div>
+        <CalendarMonthName>
+          {dateFns.format(currentDate, dateFormat)}
+        </CalendarMonthName>
+        <div onClick={nextMonth}>
+          <ChevronRight size="12" />
         </div>
       </CalendarHeaderContainer>
     )
