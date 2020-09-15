@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import * as dateFns from 'date-fns'
 import {
+  CalendarGlobalStyle,
   CalendarContainer,
   CalendarHeaderContainer,
+  CalendarMonthName,
   CalendarWeekDaysColumn,
   CalendarWeekDaysRow,
   CalendarDaysRow,
-  CalendarColumnCell,
+  CalendarDaysColumn,
+  CalendarBody,
   NumberCell,
   BgCell
 } from './styles.js'
-import './styles.css'
+import { ChevronRight, ChevronLeft } from '@styled-icons/fa-solid'
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -31,18 +34,14 @@ const Calendar = () => {
     const dateFormat = 'MMMM yyyy'
     return (
       <CalendarHeaderContainer>
-        <div className="column col-start">
-          <div className="icon" onClick={prevMonth}>
-            chevron_left
-          </div>
+        <div onClick={prevMonth}>
+          <ChevronLeft size="12" />
         </div>
-        <div className="column col-center">
-          <span>{dateFns.format(currentDate, dateFormat)}</span>
-        </div>
-        <div className="column col-end">
-          <div className="icon" onClick={nextMonth}>
-            chevron_right
-          </div>
+        <CalendarMonthName>
+          {dateFns.format(currentDate, dateFormat)}
+        </CalendarMonthName>
+        <div onClick={nextMonth}>
+          <ChevronRight size="12" />
         </div>
       </CalendarHeaderContainer>
     )
@@ -79,9 +78,9 @@ const Calendar = () => {
         const cloneDay = day
         const isDisabled = !dateFns.isSameMonth(day, monthStart)
         const isSelected = dateFns.isSameDay(day, selectedDate)
-        console.log('cloneDay: ', cloneDay)
+
         days.push(
-          <CalendarColumnCell
+          <CalendarDaysColumn
             disabled={isDisabled}
             selected={isSelected}
             key={day}
@@ -89,22 +88,25 @@ const Calendar = () => {
           >
             <NumberCell selected={isSelected}>{formattedDate}</NumberCell>
             <BgCell selected={isSelected}>{formattedDate}</BgCell>
-          </CalendarColumnCell>
+          </CalendarDaysColumn>
         )
         day = dateFns.addDays(day, 1)
       }
       rows.push(<CalendarDaysRow key={day}>{days}</CalendarDaysRow>)
       days = []
     }
-    return <div className="body">{rows}</div>
+    return <CalendarBody>{rows}</CalendarBody>
   }
-  console.log('entra aqui')
+
   return (
-    <CalendarContainer>
-      <div>{header()}</div>
-      <div>{daysOfWeek()}</div>
-      <div>{cells()}</div>
-    </CalendarContainer>
+    <React.Fragment>
+      <CalendarGlobalStyle />
+      <CalendarContainer>
+        <div>{header()}</div>
+        <div>{daysOfWeek()}</div>
+        <div>{cells()}</div>
+      </CalendarContainer>
+    </React.Fragment>
   )
 }
 
