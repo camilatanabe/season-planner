@@ -78,7 +78,7 @@ const Calendar = () => {
         const cloneDay = day
         const isDisabled = !dateFns.isSameMonth(day, monthStart)
         const isSelected = dateFns.isSameDay(day, selectedDate)
-        console.log('cloneDay: ', cloneDay)
+
         days.push(
           <CalendarDaysColumn
             disabled={isDisabled}
@@ -97,7 +97,7 @@ const Calendar = () => {
     }
     return <CalendarBody>{rows}</CalendarBody>
   }
-  console.log('entra aqui')
+
   return (
     <React.Fragment>
       <CalendarGlobalStyle />
