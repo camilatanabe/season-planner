@@ -111,7 +111,7 @@ const Calendar = ({ selectedDate, daySchedule }) => {
 }
 
 Calendar.propTypes = {
-  selectedDate: PropTypes.string,
+  selectedDate: PropTypes.instanceOf(Date),
   daySchedule: PropTypes.func
 }
 
