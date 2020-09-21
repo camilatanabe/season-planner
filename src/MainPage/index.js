@@ -12,7 +12,6 @@ const MainPage = () => {
   const openDaySchedule = day => {
     setSelectedDate(day)
     setIsOpenDrawer(true)
-    return console.log('aqui: ', day)
   }
 
   const ScheduleDrawer = () => {
