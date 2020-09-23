@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import Calendar from '../components/Calendar'
 import * as dateFns from 'date-fns'
-import { Container, Drawer, Day, Month } from './styles'
+import { Container, Header, Drawer, Day, Month, AddButton } from './styles'
+import { Add } from '@styled-icons/material'
 
 const MainPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -24,10 +25,17 @@ const MainPage = () => {
   }
 
   return (
-    <Container>
-      <Calendar selectedDate={selectedDate} daySchedule={openDaySchedule} />
-      {isOpenDrawer && ScheduleDrawer()}
-    </Container>
+    <div>
+      <Header>
+        <AddButton>
+          <Add size="26" />
+        </AddButton>
+      </Header>
+      <Container>
+        <Calendar selectedDate={selectedDate} daySchedule={openDaySchedule} />
+        {isOpenDrawer && ScheduleDrawer()}
+      </Container>
+    </div>
   )
 }
 
