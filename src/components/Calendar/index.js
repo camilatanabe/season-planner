@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import * as dateFns from 'date-fns'
 import {
   CalendarGlobalStyle,
@@ -15,9 +16,8 @@ import {
 } from './styles.js'
 import { ChevronRight, ChevronLeft } from '@styled-icons/fa-solid'
 
-const Calendar = () => {
+const Calendar = ({ selectedDate, daySchedule }) => {
   const [currentDate, setCurrentDate] = useState(new Date())
-  const [selectedDate, setSelectedDate] = useState(new Date())
 
   const nextMonth = () => {
     setCurrentDate(dateFns.addMonths(currentDate, 1))
@@ -27,7 +27,7 @@ const Calendar = () => {
   }
 
   const onDateClick = day => {
-    setSelectedDate(day)
+    daySchedule(day)
   }
 
   const header = () => {
@@ -108,6 +108,11 @@ const Calendar = () => {
       </CalendarContainer>
     </React.Fragment>
   )
+}
+
+Calendar.propTypes = {
+  selectedDate: PropTypes.instanceOf(Date),
+  daySchedule: PropTypes.func
 }
 
 export default Calendar
