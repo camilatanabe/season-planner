@@ -6,7 +6,8 @@ import {
   ModalContainer,
   ModalHeader,
   CloseButton,
-  Input
+  Input,
+  DatePickerInput
 } from './styles.js'
 import { Close } from '@styled-icons/material'
 
@@ -32,10 +33,24 @@ const EventModal = ({ isOpen, hide }) => {
     reset: resetEventName
   } = useInput('')
 
+  const {
+    value: fromDate,
+    bind: bindFromDate,
+    reset: resetFromDate
+  } = useInput(new Date())
+
+  const { value: toDate, bind: bindToDate, reset: resetToDate } = useInput(
+    new Date()
+  )
+
   const handleSubmit = evt => {
     evt.preventDefault()
     resetEventName()
+    resetFromDate()
+    resetToDate()
     console.log('eventName: ', eventName)
+    console.log('fromDate', fromDate)
+    console.log('toDate', toDate)
   }
   return isOpen
     ? ReactDOM.createPortal(
@@ -52,6 +67,14 @@ const EventModal = ({ isOpen, hide }) => {
                 <label>
                   Event Name:
                   <Input {...bindEventName} />
+                </label>
+                <label>
+                  From:
+                  <DatePickerInput {...bindFromDate} />
+                </label>
+                <label>
+                  To:
+                  <DatePickerInput {...bindToDate} />
                 </label>
                 <input type="submit" value="Submit" />
               </form>

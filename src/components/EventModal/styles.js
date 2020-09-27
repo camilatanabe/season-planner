@@ -58,3 +58,15 @@ export const Input = styled.input.attrs({
   border-bottom: 2px solid;
   outline: none;
 `
+
+export const DatePickerInput = styled.input.attrs({
+  type: 'date'
+})`
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid;
+  outline: none;
+`
