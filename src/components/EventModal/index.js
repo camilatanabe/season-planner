@@ -10,8 +10,9 @@ import {
   DatePickerInput
 } from './styles.js'
 import { Close } from '@styled-icons/material'
+import * as dateFns from 'date-fns'
 
-const EventModal = ({ isOpen, hide }) => {
+const EventModal = ({ isOpen, hide, event }) => {
   const useInput = initialValue => {
     const [value, setValue] = useState(initialValue)
 
@@ -37,20 +38,31 @@ const EventModal = ({ isOpen, hide }) => {
     value: fromDate,
     bind: bindFromDate,
     reset: resetFromDate
-  } = useInput(new Date())
+  } = useInput(dateFns.format(new Date(), 'yyyy-MM-d'))
 
   const { value: toDate, bind: bindToDate, reset: resetToDate } = useInput(
-    new Date()
+    dateFns.format(new Date(), 'yyyy-MM-d')
   )
+
+  const {
+    value: eventDescription,
+    bind: bindEventDescription,
+    reset: resetEventDescription
+  } = useInput('')
 
   const handleSubmit = evt => {
     evt.preventDefault()
     resetEventName()
     resetFromDate()
     resetToDate()
-    console.log('eventName: ', eventName)
-    console.log('fromDate', fromDate)
-    console.log('toDate', toDate)
+    resetEventDescription()
+
+    return event({
+      event_name: eventName,
+      from_date: fromDate,
+      to_date: toDate,
+      event_description: eventDescription
+    })
   }
   return isOpen
     ? ReactDOM.createPortal(
@@ -75,6 +87,10 @@ const EventModal = ({ isOpen, hide }) => {
                 <label>
                   To:
                   <DatePickerInput {...bindToDate} />
+                </label>
+                <label>
+                  Event Description:
+                  <Input {...bindEventDescription} />
                 </label>
                 <input type="submit" value="Submit" />
               </form>
