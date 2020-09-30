@@ -9,7 +9,7 @@ const MainPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [isOpenDrawer, setIsOpenDrawer] = useState(false)
   const [isEventModalOpen, setIsEventModalOpen] = useState(false)
-  const [event, setEvent] = useState({})
+  const [events, setEvents] = useState([])
   const formattedDay = dateFns.format(selectedDate, 'dd')
   const formattedMonth = dateFns.format(selectedDate, 'MMMM')
 
@@ -19,11 +19,24 @@ const MainPage = () => {
   }
 
   const ScheduleDrawer = () => {
+    const eventsDay = []
+    events.map(event => {
+      if (
+        dateFns.format(selectedDate, 'yyyy-MM-dd') >= event.from_date &&
+        dateFns.format(selectedDate, 'yyyy-MM-dd') <= event.to_date
+      ) {
+        return eventsDay.push(event)
+      }
+    })
+
     return (
       <Drawer>
         <Day>{formattedDay}</Day>
         <Month>{formattedMonth}</Month>
-        <div>{event.event_name}</div>
+        {eventsDay.length > 0 &&
+          eventsDay.map((event, index) => (
+            <div key={index}>{event.event_name}</div>
+          ))}
       </Drawer>
     )
   }
@@ -33,7 +46,7 @@ const MainPage = () => {
   }
 
   const onSubmitEvent = eventData => {
-    setEvent(eventData)
+    setEvents([...events, eventData])
   }
 
   return (
