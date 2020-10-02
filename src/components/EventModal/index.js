@@ -10,7 +10,6 @@ import {
   DatePickerInput
 } from './styles.js'
 import { Close } from '@styled-icons/material'
-import * as dateFns from 'date-fns'
 
 const EventModal = ({ isOpen, hide, event }) => {
   const useInput = initialValue => {
@@ -19,7 +18,7 @@ const EventModal = ({ isOpen, hide, event }) => {
     return {
       value,
       setValue,
-      reset: () => setValue(''),
+      reset: () => setValue(initialValue),
       bind: {
         value,
         onChange: event => {
@@ -28,21 +27,20 @@ const EventModal = ({ isOpen, hide, event }) => {
       }
     }
   }
+
   const {
-    value: eventName,
-    bind: bindEventName,
-    reset: resetEventName
+    value: eventTitle,
+    bind: bindEventTitle,
+    reset: resetEventTitle
   } = useInput('')
 
   const {
     value: fromDate,
     bind: bindFromDate,
     reset: resetFromDate
-  } = useInput(dateFns.format(new Date(), 'yyyy-MM-d'))
+  } = useInput('')
 
-  const { value: toDate, bind: bindToDate, reset: resetToDate } = useInput(
-    dateFns.format(new Date(), 'yyyy-MM-d')
-  )
+  const { value: toDate, bind: bindToDate, reset: resetToDate } = useInput('')
 
   const {
     value: eventDescription,
@@ -50,20 +48,38 @@ const EventModal = ({ isOpen, hide, event }) => {
     reset: resetEventDescription
   } = useInput('')
 
+  const isValid = () => {
+    if (!eventTitle) {
+      return false
+    }
+    if (!fromDate) {
+      return false
+    }
+    if (!toDate) {
+      return false
+    }
+    if (!eventDescription) {
+      return false
+    }
+    return true
+  }
+
   const handleSubmit = evt => {
     evt.preventDefault()
-    resetEventName()
-    resetFromDate()
-    resetToDate()
-    resetEventDescription()
-
-    return event({
-      event_name: eventName,
-      from_date: fromDate,
-      to_date: toDate,
-      event_description: eventDescription
-    })
+    if (isValid()) {
+      resetEventTitle()
+      resetFromDate()
+      resetToDate()
+      resetEventDescription()
+      return event({
+        event_name: eventTitle,
+        from_date: fromDate,
+        to_date: toDate,
+        event_description: eventDescription
+      })
+    }
   }
+
   return isOpen
     ? ReactDOM.createPortal(
         <React.Fragment>
@@ -77,8 +93,8 @@ const EventModal = ({ isOpen, hide, event }) => {
               </ModalHeader>
               <form onSubmit={handleSubmit}>
                 <label>
-                  Event Name:
-                  <Input {...bindEventName} />
+                  Event Title:
+                  <Input {...bindEventTitle} />
                 </label>
                 <label>
                   From:
@@ -86,13 +102,13 @@ const EventModal = ({ isOpen, hide, event }) => {
                 </label>
                 <label>
                   To:
-                  <DatePickerInput {...bindToDate} />
+                  <DatePickerInput {...bindToDate} min={fromDate} />
                 </label>
                 <label>
                   Event Description:
                   <Input {...bindEventDescription} />
                 </label>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Save" />
               </form>
             </ModalContainer>
           </ModalWrapper>

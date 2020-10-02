@@ -20,14 +20,15 @@ const MainPage = () => {
 
   const ScheduleDrawer = () => {
     const eventsDay = []
-    events.map(event => {
-      if (
-        dateFns.format(selectedDate, 'yyyy-MM-dd') >= event.from_date &&
-        dateFns.format(selectedDate, 'yyyy-MM-dd') <= event.to_date
-      ) {
+    events
+      .filter(
+        event =>
+          dateFns.format(selectedDate, 'yyyy-MM-dd') >= event.from_date &&
+          dateFns.format(selectedDate, 'yyyy-MM-dd') <= event.to_date
+      )
+      .map(event => {
         return eventsDay.push(event)
-      }
-    })
+      })
 
     return (
       <Drawer>
