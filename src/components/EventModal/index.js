@@ -12,6 +12,7 @@ import {
 import { Close } from '@styled-icons/material'
 
 const EventModal = ({ isOpen, hide, event }) => {
+  const [id, setId] = useState(1)
   const useInput = initialValue => {
     const [value, setValue] = useState(initialValue)
 
@@ -67,11 +68,15 @@ const EventModal = ({ isOpen, hide, event }) => {
   const handleSubmit = evt => {
     evt.preventDefault()
     if (isValid()) {
+      setId(id + 1)
       resetEventTitle()
       resetFromDate()
       resetToDate()
       resetEventDescription()
+      hide()
+
       return event({
+        event_id: id,
         event_name: eventTitle,
         from_date: fromDate,
         to_date: toDate,
