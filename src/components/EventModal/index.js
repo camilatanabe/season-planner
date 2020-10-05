@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import {
   Overlay,
@@ -11,8 +11,16 @@ import {
 } from './styles.js'
 import { Close } from '@styled-icons/material'
 
-const EventModal = ({ isOpen, hide, event }) => {
+const EventModal = ({ isOpen, hide, event, editEvent }) => {
   const [id, setId] = useState(1)
+
+  useEffect(() => {
+    resetEventTitle()
+    resetFromDate()
+    resetToDate()
+    resetEventDescription()
+  }, [editEvent])
+
   const useInput = initialValue => {
     const [value, setValue] = useState(initialValue)
 
@@ -33,21 +41,23 @@ const EventModal = ({ isOpen, hide, event }) => {
     value: eventTitle,
     bind: bindEventTitle,
     reset: resetEventTitle
-  } = useInput('')
+  } = useInput(editEvent.event_id ? editEvent.event_name : '')
 
   const {
     value: fromDate,
     bind: bindFromDate,
     reset: resetFromDate
-  } = useInput('')
+  } = useInput(editEvent.event_id ? editEvent.from_date : '')
 
-  const { value: toDate, bind: bindToDate, reset: resetToDate } = useInput('')
+  const { value: toDate, bind: bindToDate, reset: resetToDate } = useInput(
+    editEvent.event_id ? editEvent.to_date : ''
+  )
 
   const {
     value: eventDescription,
     bind: bindEventDescription,
     reset: resetEventDescription
-  } = useInput('')
+  } = useInput(editEvent.event_id ? editEvent.event_description : '')
 
   const isValid = () => {
     if (!eventTitle) {

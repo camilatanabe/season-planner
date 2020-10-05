@@ -10,6 +10,7 @@ const MainPage = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false)
   const [isEventModalOpen, setIsEventModalOpen] = useState(false)
   const [events, setEvents] = useState([])
+  const [editEvent, setEditEvent] = useState({})
   const formattedDay = dateFns.format(selectedDate, 'dd')
   const formattedMonth = dateFns.format(selectedDate, 'MMMM')
 
@@ -36,14 +37,25 @@ const MainPage = () => {
         <Month>{formattedMonth}</Month>
         {eventsDay.length > 0 &&
           eventsDay.map((event, index) => (
-            <div key={index}>{event.event_name}</div>
+            <div key={index} onClick={() => onClickeditEvent(event.event_id)}>
+              {event.event_name}
+            </div>
           ))}
       </Drawer>
     )
   }
 
+  console.log(events)
+
   const onClickOpenEventModal = () => {
     setIsEventModalOpen(!isEventModalOpen)
+  }
+
+  const onClickeditEvent = eventId => {
+    setIsEventModalOpen(!isEventModalOpen)
+
+    const foundIndex = events.find(x => x.event_id === eventId)
+    setEditEvent(foundIndex)
   }
 
   const onSubmitEvent = eventData => {
@@ -60,6 +72,7 @@ const MainPage = () => {
           isOpen={isEventModalOpen}
           hide={onClickOpenEventModal}
           event={onSubmitEvent}
+          editEvent={editEvent}
         />
       </Header>
       <Container>
