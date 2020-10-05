@@ -19,7 +19,7 @@ const EventModal = ({ isOpen, hide, event, editEvent }) => {
     resetFromDate()
     resetToDate()
     resetEventDescription()
-  }, [editEvent])
+  }, [isOpen])
 
   const useInput = initialValue => {
     const [value, setValue] = useState(initialValue)
@@ -77,7 +77,7 @@ const EventModal = ({ isOpen, hide, event, editEvent }) => {
 
   const handleSubmit = evt => {
     evt.preventDefault()
-    if (isValid()) {
+    if (!editEvent.event_id && isValid()) {
       setId(id + 1)
       resetEventTitle()
       resetFromDate()
@@ -87,6 +87,17 @@ const EventModal = ({ isOpen, hide, event, editEvent }) => {
 
       return event({
         event_id: id,
+        event_name: eventTitle,
+        from_date: fromDate,
+        to_date: toDate,
+        event_description: eventDescription
+      })
+    }
+    if (editEvent.event_id) {
+      hide()
+
+      return event({
+        event_id: editEvent.event_id,
         event_name: eventTitle,
         from_date: fromDate,
         to_date: toDate,

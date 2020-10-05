@@ -37,7 +37,7 @@ const MainPage = () => {
         <Month>{formattedMonth}</Month>
         {eventsDay.length > 0 &&
           eventsDay.map((event, index) => (
-            <div key={index} onClick={() => onClickeditEvent(event.event_id)}>
+            <div key={index} onClick={() => onClickEditEvent(event.event_id)}>
               {event.event_name}
             </div>
           ))}
@@ -49,17 +49,23 @@ const MainPage = () => {
 
   const onClickOpenEventModal = () => {
     setIsEventModalOpen(!isEventModalOpen)
+    setEditEvent({})
   }
 
-  const onClickeditEvent = eventId => {
+  const onClickEditEvent = eventId => {
     setIsEventModalOpen(!isEventModalOpen)
-
     const foundIndex = events.find(x => x.event_id === eventId)
     setEditEvent(foundIndex)
   }
 
   const onSubmitEvent = eventData => {
-    setEvents([...events, eventData])
+    const foundIndex = events.findIndex(x => x.event_id === eventData.event_id)
+
+    if (foundIndex > -1) {
+      return (events[foundIndex] = eventData)
+    } else {
+      return setEvents([...events, eventData])
+    }
   }
 
   return (
