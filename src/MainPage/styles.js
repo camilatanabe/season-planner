@@ -40,3 +40,7 @@ export const AddButton = styled.button`
     background-color: #e7e7e7;
   }
 `
+
+export const EventCard = styled.div`
+  cursor: pointer;
+`

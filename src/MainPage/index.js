@@ -2,7 +2,15 @@ import React, { useState } from 'react'
 import Calendar from '../components/Calendar'
 import EventModal from '../components/EventModal'
 import * as dateFns from 'date-fns'
-import { Container, Header, Drawer, Day, Month, AddButton } from './styles'
+import {
+  Container,
+  Header,
+  Drawer,
+  Day,
+  Month,
+  AddButton,
+  EventCard
+} from './styles'
 import { Add } from '@styled-icons/material'
 
 const MainPage = () => {
@@ -37,15 +45,16 @@ const MainPage = () => {
         <Month>{formattedMonth}</Month>
         {eventsDay.length > 0 &&
           eventsDay.map((event, index) => (
-            <div key={index} onClick={() => onClickEditEvent(event.event_id)}>
+            <EventCard
+              key={index}
+              onClick={() => onClickEditEvent(event.event_id)}
+            >
               {event.event_name}
-            </div>
+            </EventCard>
           ))}
       </Drawer>
     )
   }
-
-  console.log(events)
 
   const onClickOpenEventModal = () => {
     setIsEventModalOpen(!isEventModalOpen)
