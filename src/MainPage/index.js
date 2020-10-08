@@ -49,7 +49,7 @@ const MainPage = () => {
               key={index}
               onClick={() => onClickEditEvent(event.event_id)}
             >
-              {event.event_name}
+              <p>{event.event_name}</p>
             </EventCard>
           ))}
       </Drawer>
