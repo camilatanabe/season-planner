@@ -9,9 +9,10 @@ import {
   Day,
   Month,
   AddButton,
+  DeleteButton,
   EventCard
 } from './styles'
-import { Add } from '@styled-icons/material'
+import { Add, Delete } from '@styled-icons/material'
 
 const MainPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -50,6 +51,9 @@ const MainPage = () => {
               onClick={() => onClickEditEvent(event.event_id)}
             >
               <p>{event.event_name}</p>
+              <DeleteButton>
+                <Delete size="26" />
+              </DeleteButton>
             </EventCard>
           ))}
       </Drawer>
