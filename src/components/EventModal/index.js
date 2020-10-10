@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import {
   Overlay,
@@ -11,7 +11,16 @@ import {
 } from './styles.js'
 import { Close } from '@styled-icons/material'
 
-const EventModal = ({ isOpen, hide, event }) => {
+const EventModal = ({ isOpen, hide, event, editEvent }) => {
+  const [id, setId] = useState(1)
+
+  useEffect(() => {
+    resetEventTitle()
+    resetFromDate()
+    resetToDate()
+    resetEventDescription()
+  }, [isOpen])
+
   const useInput = initialValue => {
     const [value, setValue] = useState(initialValue)
 
@@ -32,21 +41,23 @@ const EventModal = ({ isOpen, hide, event }) => {
     value: eventTitle,
     bind: bindEventTitle,
     reset: resetEventTitle
-  } = useInput('')
+  } = useInput(editEvent.event_id ? editEvent.event_name : '')
 
   const {
     value: fromDate,
     bind: bindFromDate,
     reset: resetFromDate
-  } = useInput('')
+  } = useInput(editEvent.event_id ? editEvent.from_date : '')
 
-  const { value: toDate, bind: bindToDate, reset: resetToDate } = useInput('')
+  const { value: toDate, bind: bindToDate, reset: resetToDate } = useInput(
+    editEvent.event_id ? editEvent.to_date : ''
+  )
 
   const {
     value: eventDescription,
     bind: bindEventDescription,
     reset: resetEventDescription
-  } = useInput('')
+  } = useInput(editEvent.event_id ? editEvent.event_description : '')
 
   const isValid = () => {
     if (!eventTitle) {
@@ -66,12 +77,27 @@ const EventModal = ({ isOpen, hide, event }) => {
 
   const handleSubmit = evt => {
     evt.preventDefault()
-    if (isValid()) {
+    if (!editEvent.event_id && isValid()) {
+      setId(id + 1)
       resetEventTitle()
       resetFromDate()
       resetToDate()
       resetEventDescription()
+      hide()
+
       return event({
+        event_id: id,
+        event_name: eventTitle,
+        from_date: fromDate,
+        to_date: toDate,
+        event_description: eventDescription
+      })
+    }
+    if (editEvent.event_id) {
+      hide()
+
+      return event({
+        event_id: editEvent.event_id,
         event_name: eventTitle,
         from_date: fromDate,
         to_date: toDate,

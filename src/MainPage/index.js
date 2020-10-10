@@ -2,7 +2,15 @@ import React, { useState } from 'react'
 import Calendar from '../components/Calendar'
 import EventModal from '../components/EventModal'
 import * as dateFns from 'date-fns'
-import { Container, Header, Drawer, Day, Month, AddButton } from './styles'
+import {
+  Container,
+  Header,
+  Drawer,
+  Day,
+  Month,
+  AddButton,
+  EventCard
+} from './styles'
 import { Add } from '@styled-icons/material'
 
 const MainPage = () => {
@@ -10,6 +18,7 @@ const MainPage = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false)
   const [isEventModalOpen, setIsEventModalOpen] = useState(false)
   const [events, setEvents] = useState([])
+  const [editEvent, setEditEvent] = useState({})
   const formattedDay = dateFns.format(selectedDate, 'dd')
   const formattedMonth = dateFns.format(selectedDate, 'MMMM')
 
@@ -36,7 +45,12 @@ const MainPage = () => {
         <Month>{formattedMonth}</Month>
         {eventsDay.length > 0 &&
           eventsDay.map((event, index) => (
-            <div key={index}>{event.event_name}</div>
+            <EventCard
+              key={index}
+              onClick={() => onClickEditEvent(event.event_id)}
+            >
+              <p>{event.event_name}</p>
+            </EventCard>
           ))}
       </Drawer>
     )
@@ -44,10 +58,23 @@ const MainPage = () => {
 
   const onClickOpenEventModal = () => {
     setIsEventModalOpen(!isEventModalOpen)
+    setEditEvent({})
+  }
+
+  const onClickEditEvent = eventId => {
+    setIsEventModalOpen(!isEventModalOpen)
+    const foundIndex = events.find(x => x.event_id === eventId)
+    setEditEvent(foundIndex)
   }
 
   const onSubmitEvent = eventData => {
-    setEvents([...events, eventData])
+    const foundIndex = events.findIndex(x => x.event_id === eventData.event_id)
+
+    if (foundIndex > -1) {
+      return (events[foundIndex] = eventData)
+    } else {
+      return setEvents([...events, eventData])
+    }
   }
 
   return (
@@ -60,6 +87,7 @@ const MainPage = () => {
           isOpen={isEventModalOpen}
           hide={onClickOpenEventModal}
           event={onSubmitEvent}
+          editEvent={editEvent}
         />
       </Header>
       <Container>
