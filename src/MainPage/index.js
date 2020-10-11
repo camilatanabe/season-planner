@@ -46,12 +46,11 @@ const MainPage = () => {
         <Month>{formattedMonth}</Month>
         {eventsDay.length > 0 &&
           eventsDay.map((event, index) => (
-            <EventCard
-              key={index}
-              onClick={() => onClickEditEvent(event.event_id)}
-            >
-              <p>{event.event_name}</p>
-              <DeleteButton>
+            <EventCard key={index}>
+              <p onClick={() => onClickEditEvent(event.event_id)}>
+                {event.event_name}
+              </p>
+              <DeleteButton onClick={() => onClickDeleteEvent(event.event_id)}>
                 <Delete size="26" />
               </DeleteButton>
             </EventCard>
@@ -69,6 +68,12 @@ const MainPage = () => {
     setIsEventModalOpen(!isEventModalOpen)
     const foundIndex = events.find(x => x.event_id === eventId)
     setEditEvent(foundIndex)
+  }
+
+  const onClickDeleteEvent = eventId => {
+    const newEventsArray = events.filter(x => x.event_id !== eventId)
+
+    return setEvents(newEventsArray)
   }
 
   const onSubmitEvent = eventData => {
