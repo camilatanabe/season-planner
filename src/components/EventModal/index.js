@@ -6,12 +6,13 @@ import {
   ModalContainer,
   ModalHeader,
   CloseButton,
+  DeleteButton,
   Input,
   DatePickerInput
 } from './styles.js'
-import { Close } from '@styled-icons/material'
+import { Close, Delete } from '@styled-icons/material'
 
-const EventModal = ({ isOpen, hide, event, editEvent }) => {
+const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
   const [id, setId] = useState(1)
 
   useEffect(() => {
@@ -113,6 +114,11 @@ const EventModal = ({ isOpen, hide, event, editEvent }) => {
           <ModalWrapper>
             <ModalContainer>
               <ModalHeader>
+                {editEvent.event_id && (
+                  <DeleteButton onClick={() => deleteEvent(editEvent.event_id)}>
+                    <Delete size="26" />
+                  </DeleteButton>
+                )}
                 <CloseButton onClick={hide}>
                   <Close size="12" />
                 </CloseButton>

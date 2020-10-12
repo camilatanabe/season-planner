@@ -9,10 +9,9 @@ import {
   Day,
   Month,
   AddButton,
-  DeleteButton,
   EventCard
 } from './styles'
-import { Add, Delete } from '@styled-icons/material'
+import { Add } from '@styled-icons/material'
 
 const MainPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -46,13 +45,11 @@ const MainPage = () => {
         <Month>{formattedMonth}</Month>
         {eventsDay.length > 0 &&
           eventsDay.map((event, index) => (
-            <EventCard key={index}>
-              <p onClick={() => onClickEditEvent(event.event_id)}>
-                {event.event_name}
-              </p>
-              <DeleteButton onClick={() => onClickDeleteEvent(event.event_id)}>
-                <Delete size="26" />
-              </DeleteButton>
+            <EventCard
+              key={index}
+              onClick={() => onClickEditEvent(event.event_id)}
+            >
+              <p>{event.event_name}</p>
             </EventCard>
           ))}
       </Drawer>
@@ -72,6 +69,7 @@ const MainPage = () => {
 
   const onClickDeleteEvent = eventId => {
     const newEventsArray = events.filter(x => x.event_id !== eventId)
+    setIsEventModalOpen(!isEventModalOpen)
 
     return setEvents(newEventsArray)
   }
@@ -97,6 +95,7 @@ const MainPage = () => {
           hide={onClickOpenEventModal}
           event={onSubmitEvent}
           editEvent={editEvent}
+          deleteEvent={onClickDeleteEvent}
         />
       </Header>
       <Container>

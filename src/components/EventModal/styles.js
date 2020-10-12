@@ -47,6 +47,17 @@ export const CloseButton = styled.button`
   margin-left: 0.5rem;
 `
 
+export const DeleteButton = styled.button`
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  outline: none;
+  &:hover {
+    background-color: #e7e7e7;
+  }
+`
+
 export const Input = styled.input.attrs({
   type: 'text'
 })`
