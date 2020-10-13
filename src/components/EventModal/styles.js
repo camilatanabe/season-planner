@@ -11,7 +11,20 @@ export const Overlay = styled.div`
   opacity: 0.5;
 `
 
+export const ConfirmModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1060;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+`
+
 export const ModalWrapper = styled.div`
+  display: flex;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -23,7 +36,31 @@ export const ModalWrapper = styled.div`
   outline: 0;
 `
 
+export const ConfirmModalWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1070;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+`
+
 export const ModalContainer = styled.div`
+  z-index: 100;
+  background: white;
+  position: relative;
+  margin: 1.75rem auto;
+  border-radius: 3px;
+  max-width: 500px;
+  padding: 2rem;
+`
+
+export const ConfirmModalContainer = styled.div`
   z-index: 100;
   background: white;
   position: relative;

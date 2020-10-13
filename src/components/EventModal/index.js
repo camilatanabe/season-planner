@@ -8,12 +8,16 @@ import {
   CloseButton,
   DeleteButton,
   Input,
-  DatePickerInput
+  DatePickerInput,
+  ConfirmModalOverlay,
+  ConfirmModalWrapper,
+  ConfirmModalContainer
 } from './styles.js'
 import { Close, Delete } from '@styled-icons/material'
 
 const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
   const [id, setId] = useState(1)
+  const [isConfimModalOpen, setIsConfirmModalOpen] = useState(false)
 
   useEffect(() => {
     resetEventTitle()
@@ -107,6 +111,15 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
     }
   }
 
+  const onClickCloseConfirmModal = () => {
+    setIsConfirmModalOpen(!isConfimModalOpen)
+  }
+
+  const onClickConfirmDelete = eventId => {
+    deleteEvent(eventId)
+    setIsConfirmModalOpen(!isConfimModalOpen)
+  }
+
   return isOpen
     ? ReactDOM.createPortal(
         <React.Fragment>
@@ -115,7 +128,9 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
             <ModalContainer>
               <ModalHeader>
                 {editEvent.event_id && (
-                  <DeleteButton onClick={() => deleteEvent(editEvent.event_id)}>
+                  <DeleteButton
+                    onClick={() => setIsConfirmModalOpen(!isConfimModalOpen)}
+                  >
                     <Delete size="26" />
                   </DeleteButton>
                 )}
@@ -144,6 +159,22 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
               </form>
             </ModalContainer>
           </ModalWrapper>
+          {isConfimModalOpen && (
+            <React.Fragment>
+              <ConfirmModalOverlay />
+              <ConfirmModalWrapper>
+                <ConfirmModalContainer>
+                  <p>Are you sure?</p>
+                  <button onClick={onClickCloseConfirmModal}>Cancel</button>
+                  <button
+                    onClick={() => onClickConfirmDelete(editEvent.event_id)}
+                  >
+                    Delete
+                  </button>
+                </ConfirmModalContainer>
+              </ConfirmModalWrapper>
+            </React.Fragment>
+          )}
         </React.Fragment>,
         document.body
       )
