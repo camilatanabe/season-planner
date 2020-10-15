@@ -66,7 +66,7 @@ export const ConfirmModalContainer = styled.div`
   position: relative;
   margin: 1.75rem auto;
   border-radius: 3px;
-  max-width: 500px;
+  width: 300px;
   padding: 2rem;
 `
 
@@ -117,4 +117,23 @@ export const DatePickerInput = styled.input.attrs({
   border: none;
   border-bottom: 2px solid;
   outline: none;
+`
+
+export const ConfirmModalButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`
+
+export const ConfirmCancelButton = styled.button`
+  padding: 10px;
+  margin-right: 20px;
+  background-color: #ffffff;
+  cursor: pointer;
+`
+
+export const ConfirmDeleteButton = styled.button`
+  padding: 10px;
+  background-color: #ff0000;
+  cursor: pointer;
+  border: none;
 `

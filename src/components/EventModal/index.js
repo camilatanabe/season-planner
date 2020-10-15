@@ -11,7 +11,10 @@ import {
   DatePickerInput,
   ConfirmModalOverlay,
   ConfirmModalWrapper,
-  ConfirmModalContainer
+  ConfirmModalContainer,
+  ConfirmModalButtonContainer,
+  ConfirmCancelButton,
+  ConfirmDeleteButton
 } from './styles.js'
 import { Close, Delete } from '@styled-icons/material'
 
@@ -165,12 +168,16 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
               <ConfirmModalWrapper>
                 <ConfirmModalContainer>
                   <p>Are you sure?</p>
-                  <button onClick={onClickCloseConfirmModal}>Cancel</button>
-                  <button
-                    onClick={() => onClickConfirmDelete(editEvent.event_id)}
-                  >
-                    Delete
-                  </button>
+                  <ConfirmModalButtonContainer>
+                    <ConfirmCancelButton onClick={onClickCloseConfirmModal}>
+                      Cancel
+                    </ConfirmCancelButton>
+                    <ConfirmDeleteButton
+                      onClick={() => onClickConfirmDelete(editEvent.event_id)}
+                    >
+                      Delete
+                    </ConfirmDeleteButton>
+                  </ConfirmModalButtonContainer>
                 </ConfirmModalContainer>
               </ConfirmModalWrapper>
             </React.Fragment>
