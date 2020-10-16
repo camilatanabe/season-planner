@@ -16,7 +16,7 @@ import {
 } from './styles.js'
 import { ChevronRight, ChevronLeft } from '@styled-icons/fa-solid'
 
-const Calendar = ({ selectedDate, daySchedule }) => {
+const Calendar = ({ selectedDate, daySchedule, events }) => {
   const [currentDate, setCurrentDate] = useState(new Date())
 
   const nextMonth = () => {
@@ -78,6 +78,12 @@ const Calendar = ({ selectedDate, daySchedule }) => {
         const cloneDay = day
         const isDisabled = !dateFns.isSameMonth(day, monthStart)
         const isSelected = dateFns.isSameDay(day, selectedDate)
+        const dayEvents = events.filter(
+          event =>
+            dateFns.format(day, 'yyyy-MM-dd') >= event.from_date &&
+            dateFns.format(day, 'yyyy-MM-dd') <= event.to_date
+        )
+        console.log('day events: ', dayEvents)
 
         days.push(
           <CalendarDaysColumn
@@ -86,6 +92,18 @@ const Calendar = ({ selectedDate, daySchedule }) => {
             key={day}
             onClick={() => onDateClick(dateFns.toDate(cloneDay))}
           >
+            {dayEvents.map((event, index) => {
+              if (dateFns.format(day, 'yyyy-MM-dd') === event.from_date) {
+                return <p key={index}>{event.event_name} 1</p>
+              } else if (
+                dateFns.format(day, 'yyyy-MM-dd') > event.from_date &&
+                dateFns.format(day, 'yyyy-MM-dd') < event.to_date
+              ) {
+                return <p key={index}>{event.event_name} 2</p>
+              } else if (dateFns.format(day, 'yyyy-MM-dd') === event.to_date) {
+                return <p key={index}>{event.event_name} 3</p>
+              }
+            })}
             <NumberCell selected={isSelected}>{formattedDate}</NumberCell>
             <BgCell selected={isSelected}>{formattedDate}</BgCell>
           </CalendarDaysColumn>
@@ -112,7 +130,8 @@ const Calendar = ({ selectedDate, daySchedule }) => {
 
 Calendar.propTypes = {
   selectedDate: PropTypes.instanceOf(Date),
-  daySchedule: PropTypes.func
+  daySchedule: PropTypes.func,
+  events: PropTypes.array
 }
 
 export default Calendar

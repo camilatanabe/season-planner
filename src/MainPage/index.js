@@ -99,7 +99,11 @@ const MainPage = () => {
         />
       </Header>
       <Container>
-        <Calendar selectedDate={selectedDate} daySchedule={openDaySchedule} />
+        <Calendar
+          selectedDate={selectedDate}
+          daySchedule={openDaySchedule}
+          events={events}
+        />
         {isOpenDrawer && ScheduleDrawer()}
       </Container>
     </div>
