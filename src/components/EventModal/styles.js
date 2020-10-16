@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Close, Delete } from '@styled-icons/material'
 
 export const Overlay = styled.div`
   position: fixed;
@@ -76,12 +77,14 @@ export const ModalHeader = styled.div`
 `
 
 export const CloseButton = styled.button`
-  font-size: 0.9rem;
-  font-weight: 700;
+  background-color: transparent;
   border: none;
-  border-radius: 3px;
-  padding: 0.3rem 1rem;
-  margin-left: 0.5rem;
+  border-radius: 50%;
+  padding: 5px;
+  outline: none;
+  &:hover {
+    background-color: #efefef;
+  }
 `
 
 export const DeleteButton = styled.button`
@@ -91,7 +94,7 @@ export const DeleteButton = styled.button`
   padding: 5px;
   outline: none;
   &:hover {
-    background-color: #e7e7e7;
+    background-color: #efefef;
   }
 `
 
@@ -119,6 +122,18 @@ export const DatePickerInput = styled.input.attrs({
   outline: none;
 `
 
+export const CloseIcon = styled(Close)`
+  && {
+    color: #9e9e9e;
+  }
+`
+
+export const DeleteIcon = styled(Delete)`
+  && {
+    color: #9e9e9e;
+  }
+`
+
 export const ConfirmModalButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -128,6 +143,7 @@ export const ConfirmCancelButton = styled.button`
   padding: 10px;
   margin-right: 20px;
   background-color: #ffffff;
+  border-color: #f0f0f0;
   cursor: pointer;
 `
 
@@ -136,4 +152,18 @@ export const ConfirmDeleteButton = styled.button`
   background-color: #ff0000;
   cursor: pointer;
   border: none;
+`
+
+export const ConfirmCancelButtonText = styled.p`
+  font-weight: bold;
+  color: #909090;
+  margin: 0px;
+  border-radius: 5px;
+`
+
+export const ConfirmDeleteButtonText = styled.p`
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0px;
+  border-radius: 5px;
 `

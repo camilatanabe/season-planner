@@ -12,11 +12,14 @@ import {
   ConfirmModalOverlay,
   ConfirmModalWrapper,
   ConfirmModalContainer,
+  CloseIcon,
+  DeleteIcon,
   ConfirmModalButtonContainer,
   ConfirmCancelButton,
-  ConfirmDeleteButton
+  ConfirmDeleteButton,
+  ConfirmCancelButtonText,
+  ConfirmDeleteButtonText
 } from './styles.js'
-import { Close, Delete } from '@styled-icons/material'
 
 const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
   const [id, setId] = useState(1)
@@ -134,11 +137,11 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
                   <DeleteButton
                     onClick={() => setIsConfirmModalOpen(!isConfimModalOpen)}
                   >
-                    <Delete size="26" />
+                    <DeleteIcon size="26" />
                   </DeleteButton>
                 )}
                 <CloseButton onClick={hide}>
-                  <Close size="12" />
+                  <CloseIcon size="26" />
                 </CloseButton>
               </ModalHeader>
               <form onSubmit={handleSubmit}>
@@ -170,12 +173,12 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
                   <p>Are you sure?</p>
                   <ConfirmModalButtonContainer>
                     <ConfirmCancelButton onClick={onClickCloseConfirmModal}>
-                      Cancel
+                      <ConfirmCancelButtonText>Cancel</ConfirmCancelButtonText>
                     </ConfirmCancelButton>
                     <ConfirmDeleteButton
                       onClick={() => onClickConfirmDelete(editEvent.event_id)}
                     >
-                      Delete
+                      <ConfirmDeleteButtonText>Delete</ConfirmDeleteButtonText>
                     </ConfirmDeleteButton>
                   </ConfirmModalButtonContainer>
                 </ConfirmModalContainer>

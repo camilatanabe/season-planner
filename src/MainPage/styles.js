@@ -37,7 +37,7 @@ export const AddButton = styled.button`
   padding: 5px;
   outline: none;
   &:hover {
-    background-color: #e7e7e7;
+    background-color: #efefef;
   }
 `
 
