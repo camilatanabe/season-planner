@@ -129,3 +129,8 @@ export const BgCell = styled.span`
     transition: 0.5s ease-in;
   }
 `
+
+export const Events = styled.div`
+  background-color: green;
+  padding: 5px;
+`

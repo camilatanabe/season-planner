@@ -12,7 +12,8 @@ import {
   CalendarDaysColumn,
   CalendarBody,
   NumberCell,
-  BgCell
+  BgCell,
+  Events
 } from './styles.js'
 import { ChevronRight, ChevronLeft } from '@styled-icons/fa-solid'
 
@@ -94,14 +95,14 @@ const Calendar = ({ selectedDate, daySchedule, events }) => {
           >
             {dayEvents.map((event, index) => {
               if (dateFns.format(day, 'yyyy-MM-dd') === event.from_date) {
-                return <p key={index}>{event.event_name} 1</p>
+                return <Events key={index}>{event.event_name}</Events>
               } else if (
                 dateFns.format(day, 'yyyy-MM-dd') > event.from_date &&
                 dateFns.format(day, 'yyyy-MM-dd') < event.to_date
               ) {
-                return <p key={index}>{event.event_name} 2</p>
+                return <Events key={index}> </Events>
               } else if (dateFns.format(day, 'yyyy-MM-dd') === event.to_date) {
-                return <p key={index}>{event.event_name} 3</p>
+                return <Events key={index}> </Events>
               }
             })}
             <NumberCell selected={isSelected}>{formattedDate}</NumberCell>
