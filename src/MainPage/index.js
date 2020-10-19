@@ -67,6 +67,13 @@ const MainPage = () => {
     setEditEvent(foundIndex)
   }
 
+  const onClickDeleteEvent = eventId => {
+    const newEventsArray = events.filter(x => x.event_id !== eventId)
+    setIsEventModalOpen(!isEventModalOpen)
+
+    return setEvents(newEventsArray)
+  }
+
   const onSubmitEvent = eventData => {
     const foundIndex = events.findIndex(x => x.event_id === eventData.event_id)
 
@@ -88,6 +95,7 @@ const MainPage = () => {
           hide={onClickOpenEventModal}
           event={onSubmitEvent}
           editEvent={editEvent}
+          deleteEvent={onClickDeleteEvent}
         />
       </Header>
       <Container>
