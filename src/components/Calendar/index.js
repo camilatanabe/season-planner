@@ -100,9 +100,9 @@ const Calendar = ({ selectedDate, daySchedule, events }) => {
                 dateFns.format(day, 'yyyy-MM-dd') > event.from_date &&
                 dateFns.format(day, 'yyyy-MM-dd') < event.to_date
               ) {
-                return <Events key={index}> </Events>
+                return <Events key={index}>&nbsp;</Events>
               } else if (dateFns.format(day, 'yyyy-MM-dd') === event.to_date) {
-                return <Events key={index}> </Events>
+                return <Events key={index}>&nbsp;</Events>
               }
             })}
             <NumberCell selected={isSelected}>{formattedDate}</NumberCell>
