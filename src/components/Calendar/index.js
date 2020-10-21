@@ -94,15 +94,11 @@ const Calendar = ({ selectedDate, daySchedule, events }) => {
             onClick={() => onDateClick(dateFns.toDate(cloneDay))}
           >
             {dayEvents.map((event, index) => {
-              if (dateFns.format(day, 'yyyy-MM-dd') === event.from_date) {
-                return <Events key={index}>{event.event_name}</Events>
-              } else if (
-                dateFns.format(day, 'yyyy-MM-dd') > event.from_date &&
-                dateFns.format(day, 'yyyy-MM-dd') < event.to_date
+              if (
+                dateFns.format(day, 'yyyy-MM-dd') >= event.from_date &&
+                dateFns.format(day, 'yyyy-MM-dd') <= event.to_date
               ) {
-                return <Events key={index}>&nbsp;</Events>
-              } else if (dateFns.format(day, 'yyyy-MM-dd') === event.to_date) {
-                return <Events key={index}>&nbsp;</Events>
+                return <Events key={index} top={2 + index} />
               }
             })}
             <NumberCell selected={isSelected}>{formattedDate}</NumberCell>
