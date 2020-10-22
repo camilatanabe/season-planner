@@ -81,8 +81,8 @@ const Calendar = ({ selectedDate, daySchedule, events }) => {
         const isSelected = dateFns.isSameDay(day, selectedDate)
         const dayEvents = events.filter(
           event =>
-            dateFns.format(day, 'yyyy-MM-dd') >= event.from_date &&
-            dateFns.format(day, 'yyyy-MM-dd') <= event.to_date
+            dateFns.format(cloneDay, 'yyyy-MM-dd') >= event.from_date &&
+            dateFns.format(cloneDay, 'yyyy-MM-dd') <= event.to_date
         )
         console.log('day events: ', dayEvents)
 
@@ -95,8 +95,8 @@ const Calendar = ({ selectedDate, daySchedule, events }) => {
           >
             {dayEvents.map((event, index) => {
               if (
-                dateFns.format(day, 'yyyy-MM-dd') >= event.from_date &&
-                dateFns.format(day, 'yyyy-MM-dd') <= event.to_date
+                dateFns.format(cloneDay, 'yyyy-MM-dd') >= event.from_date &&
+                dateFns.format(cloneDay, 'yyyy-MM-dd') <= event.to_date
               ) {
                 return <Events key={index} top={2 + index} />
               }
