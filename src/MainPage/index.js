@@ -15,7 +15,7 @@ import { Add } from '@styled-icons/material'
 
 const MainPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
-  const [isOpenDrawer, setIsOpenDrawer] = useState(false)
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [isEventModalOpen, setIsEventModalOpen] = useState(false)
   const [events, setEvents] = useState([])
   const [editEvent, setEditEvent] = useState({})
@@ -24,7 +24,7 @@ const MainPage = () => {
 
   const openDaySchedule = day => {
     setSelectedDate(day)
-    setIsOpenDrawer(true)
+    setIsDrawerOpen(true)
   }
 
   const ScheduleDrawer = () => {
@@ -99,8 +99,12 @@ const MainPage = () => {
         />
       </Header>
       <Container>
-        <Calendar selectedDate={selectedDate} daySchedule={openDaySchedule} />
-        {isOpenDrawer && ScheduleDrawer()}
+        <Calendar
+          selectedDate={selectedDate}
+          daySchedule={openDaySchedule}
+          events={events}
+        />
+        {isDrawerOpen && ScheduleDrawer()}
       </Container>
     </div>
   )

@@ -12,11 +12,12 @@ import {
   CalendarDaysColumn,
   CalendarBody,
   NumberCell,
-  BgCell
+  BgCell,
+  Events
 } from './styles.js'
 import { ChevronRight, ChevronLeft } from '@styled-icons/fa-solid'
 
-const Calendar = ({ selectedDate, daySchedule }) => {
+const Calendar = ({ selectedDate, daySchedule, events }) => {
   const [currentDate, setCurrentDate] = useState(new Date())
 
   const nextMonth = () => {
@@ -78,6 +79,11 @@ const Calendar = ({ selectedDate, daySchedule }) => {
         const cloneDay = day
         const isDisabled = !dateFns.isSameMonth(day, monthStart)
         const isSelected = dateFns.isSameDay(day, selectedDate)
+        const dayEvents = events.filter(
+          event =>
+            dateFns.format(cloneDay, 'yyyy-MM-dd') >= event.from_date &&
+            dateFns.format(cloneDay, 'yyyy-MM-dd') <= event.to_date
+        )
 
         days.push(
           <CalendarDaysColumn
@@ -86,6 +92,14 @@ const Calendar = ({ selectedDate, daySchedule }) => {
             key={day}
             onClick={() => onDateClick(dateFns.toDate(cloneDay))}
           >
+            {dayEvents.map((event, index) => {
+              if (
+                dateFns.format(cloneDay, 'yyyy-MM-dd') >= event.from_date &&
+                dateFns.format(cloneDay, 'yyyy-MM-dd') <= event.to_date
+              ) {
+                return <Events key={index} top={2 + index} />
+              }
+            })}
             <NumberCell selected={isSelected}>{formattedDate}</NumberCell>
             <BgCell selected={isSelected}>{formattedDate}</BgCell>
           </CalendarDaysColumn>
@@ -112,7 +126,8 @@ const Calendar = ({ selectedDate, daySchedule }) => {
 
 Calendar.propTypes = {
   selectedDate: PropTypes.instanceOf(Date),
-  daySchedule: PropTypes.func
+  daySchedule: PropTypes.func,
+  events: PropTypes.array
 }
 
 export default Calendar

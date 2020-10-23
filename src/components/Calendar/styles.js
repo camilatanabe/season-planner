@@ -129,3 +129,11 @@ export const BgCell = styled.span`
     transition: 0.5s ease-in;
   }
 `
+
+export const Events = styled.div`
+  position: absolute;
+  width: 100%;
+  background-color: green;
+  padding: 0.2em;
+  top: ${props => props.top}em;
+`
