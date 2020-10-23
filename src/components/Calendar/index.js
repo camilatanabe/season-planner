@@ -84,7 +84,6 @@ const Calendar = ({ selectedDate, daySchedule, events }) => {
             dateFns.format(cloneDay, 'yyyy-MM-dd') >= event.from_date &&
             dateFns.format(cloneDay, 'yyyy-MM-dd') <= event.to_date
         )
-        console.log('day events: ', dayEvents)
 
         days.push(
           <CalendarDaysColumn
