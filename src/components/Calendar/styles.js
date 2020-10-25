@@ -134,6 +134,6 @@ export const Events = styled.div`
   position: absolute;
   width: 100%;
   background-color: green;
-  padding: 0.2em;
+  padding: 0.1em;
   top: ${props => props.top}em;
 `

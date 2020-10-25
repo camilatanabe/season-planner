@@ -9,7 +9,8 @@ import {
   Day,
   Month,
   AddButton,
-  EventCard
+  EventCard,
+  EventText
 } from './styles'
 import { Add } from '@styled-icons/material'
 
@@ -49,7 +50,7 @@ const MainPage = () => {
               key={index}
               onClick={() => onClickEditEvent(event.event_id)}
             >
-              <p>{event.event_name}</p>
+              <EventText>{event.event_name}</EventText>
             </EventCard>
           ))}
       </Drawer>

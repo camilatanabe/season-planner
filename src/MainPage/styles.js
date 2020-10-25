@@ -22,12 +22,14 @@ export const Drawer = styled.div`
 `
 
 export const Day = styled.p`
-  font-size: 26px;
+  font-size: 3em;
+  margin: 0;
 `
 
 export const Month = styled.p`
   font-size: 20px;
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 3em;
 `
 
 export const AddButton = styled.button`
@@ -44,9 +46,13 @@ export const AddButton = styled.button`
 export const EventCard = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
   height: 45px;
-  padding: 10px;
+  padding-left: 10px;
   cursor: pointer;
+  border-left: 0.3em solid green;
+`
+
+export const EventText = styled.p`
+  margin: 0;
 `
