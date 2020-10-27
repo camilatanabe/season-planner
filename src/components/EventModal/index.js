@@ -30,6 +30,7 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
     resetFromDate()
     resetToDate()
     resetEventDescription()
+    resetEventColor()
   }, [isOpen])
 
   const useInput = initialValue => {
@@ -70,6 +71,12 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
     reset: resetEventDescription
   } = useInput(editEvent.event_id ? editEvent.event_description : '')
 
+  const {
+    value: eventColor,
+    bind: bindEventColor,
+    reset: resetEventColor
+  } = useInput(editEvent.event_id ? editEvent.event_color : '#00ff00')
+
   const isValid = () => {
     if (!eventTitle) {
       return false
@@ -94,6 +101,7 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
       resetFromDate()
       resetToDate()
       resetEventDescription()
+      resetEventColor()
       hide()
 
       return event({
@@ -101,7 +109,8 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
         event_name: eventTitle,
         from_date: fromDate,
         to_date: toDate,
-        event_description: eventDescription
+        event_description: eventDescription,
+        event_color: eventColor
       })
     }
     if (editEvent.event_id) {
@@ -112,7 +121,8 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
         event_name: eventTitle,
         from_date: fromDate,
         to_date: toDate,
-        event_description: eventDescription
+        event_description: eventDescription,
+        event_color: eventColor
       })
     }
   }
@@ -161,6 +171,11 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
                   Event Description:
                   <Input {...bindEventDescription} />
                 </label>
+                <label>
+                  Select a color to event{' '}
+                  <input type="color" {...bindEventColor} />
+                </label>
+                <br></br>
                 <input type="submit" value="Save" />
               </form>
             </ModalContainer>

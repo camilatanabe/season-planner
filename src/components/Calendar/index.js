@@ -97,7 +97,13 @@ const Calendar = ({ selectedDate, daySchedule, events }) => {
                 dateFns.format(cloneDay, 'yyyy-MM-dd') >= event.from_date &&
                 dateFns.format(cloneDay, 'yyyy-MM-dd') <= event.to_date
               ) {
-                return <Events key={index} top={2 + index} />
+                return (
+                  <Events
+                    key={index}
+                    top={2 + index}
+                    color={event.event_color}
+                  />
+                )
               }
             })}
             <NumberCell selected={isSelected}>{formattedDate}</NumberCell>

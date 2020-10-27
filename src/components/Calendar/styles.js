@@ -133,7 +133,7 @@ export const BgCell = styled.span`
 export const Events = styled.div`
   position: absolute;
   width: 100%;
-  background-color: green;
+  background-color: ${props => props.color};
   padding: 0.1em;
   top: ${props => props.top}em;
 `

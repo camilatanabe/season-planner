@@ -50,7 +50,7 @@ export const EventCard = styled.div`
   height: 45px;
   padding-left: 10px;
   cursor: pointer;
-  border-left: 0.3em solid green;
+  border-left: 0.3em solid ${props => props.color};
 `
 
 export const EventText = styled.p`

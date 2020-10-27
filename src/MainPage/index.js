@@ -49,6 +49,7 @@ const MainPage = () => {
             <EventCard
               key={index}
               onClick={() => onClickEditEvent(event.event_id)}
+              color={event.event_color}
             >
               <EventText>{event.event_name}</EventText>
             </EventCard>
