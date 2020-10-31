@@ -93,14 +93,11 @@ const Calendar = ({ selectedDate, daySchedule, events }) => {
             onClick={() => onDateClick(dateFns.toDate(cloneDay))}
           >
             {dayEvents.map((event, index) => {
-              if (
-                dateFns.format(cloneDay, 'yyyy-MM-dd') >= event.from_date &&
-                dateFns.format(cloneDay, 'yyyy-MM-dd') <= event.to_date
-              ) {
+              while (dateFns.format(cloneDay, 'yyyy-MM-dd') <= event.to_date) {
                 return (
                   <Events
                     key={index}
-                    top={2 + index}
+                    top={2 + event.event_id}
                     color={event.event_color}
                   />
                 )
