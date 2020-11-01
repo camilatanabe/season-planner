@@ -95,11 +95,7 @@ const Calendar = ({ selectedDate, daySchedule, events }) => {
             {dayEvents.map((event, index) => {
               while (dateFns.format(cloneDay, 'yyyy-MM-dd') <= event.to_date) {
                 return (
-                  <Events
-                    key={index}
-                    top={2 + event.event_id}
-                    color={event.event_color}
-                  />
+                  <Events key={index} top={2 + event.id} color={event.color} />
                 )
               }
             })}

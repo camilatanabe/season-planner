@@ -48,10 +48,10 @@ const MainPage = () => {
           eventsDay.map((event, index) => (
             <EventCard
               key={index}
-              onClick={() => onClickEditEvent(event.event_id)}
-              color={event.event_color}
+              onClick={() => onClickEditEvent(event.id)}
+              color={event.color}
             >
-              <EventText>{event.event_name}</EventText>
+              <EventText>{event.title}</EventText>
             </EventCard>
           ))}
       </Drawer>
@@ -65,19 +65,19 @@ const MainPage = () => {
 
   const onClickEditEvent = eventId => {
     setIsEventModalOpen(!isEventModalOpen)
-    const foundIndex = events.find(x => x.event_id === eventId)
+    const foundIndex = events.find(x => x.id === eventId)
     setEditEvent(foundIndex)
   }
 
   const onClickDeleteEvent = eventId => {
-    const newEventsArray = events.filter(x => x.event_id !== eventId)
+    const newEventsArray = events.filter(x => x.id !== eventId)
     setIsEventModalOpen(!isEventModalOpen)
 
     return setEvents(newEventsArray)
   }
 
   const onSubmitEvent = eventData => {
-    const foundIndex = events.findIndex(x => x.event_id === eventData.event_id)
+    const foundIndex = events.findIndex(x => x.id === eventData.id)
 
     if (foundIndex > -1) {
       return (events[foundIndex] = eventData)

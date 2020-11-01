@@ -53,29 +53,29 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
     value: eventTitle,
     bind: bindEventTitle,
     reset: resetEventTitle
-  } = useInput(editEvent.event_id ? editEvent.event_name : '')
+  } = useInput(editEvent.id ? editEvent.title : '')
 
   const {
     value: fromDate,
     bind: bindFromDate,
     reset: resetFromDate
-  } = useInput(editEvent.event_id ? editEvent.from_date : '')
+  } = useInput(editEvent.id ? editEvent.from_date : '')
 
   const { value: toDate, bind: bindToDate, reset: resetToDate } = useInput(
-    editEvent.event_id ? editEvent.to_date : ''
+    editEvent.id ? editEvent.to_date : ''
   )
 
   const {
     value: eventDescription,
     bind: bindEventDescription,
     reset: resetEventDescription
-  } = useInput(editEvent.event_id ? editEvent.event_description : '')
+  } = useInput(editEvent.id ? editEvent.description : '')
 
   const {
     value: eventColor,
     bind: bindEventColor,
     reset: resetEventColor
-  } = useInput(editEvent.event_id ? editEvent.event_color : '#00ff00')
+  } = useInput(editEvent.id ? editEvent.color : '#00ff00')
 
   const isValid = () => {
     if (!eventTitle) {
@@ -95,7 +95,7 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
 
   const handleSubmit = evt => {
     evt.preventDefault()
-    if (!editEvent.event_id && isValid()) {
+    if (!editEvent.id && isValid()) {
       setId(id + 1)
       resetEventTitle()
       resetFromDate()
@@ -105,24 +105,24 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
       hide()
 
       return event({
-        event_id: id,
-        event_name: eventTitle,
+        id: id,
+        title: eventTitle,
         from_date: fromDate,
         to_date: toDate,
-        event_description: eventDescription,
-        event_color: eventColor
+        description: eventDescription,
+        color: eventColor
       })
     }
-    if (editEvent.event_id) {
+    if (editEvent.id) {
       hide()
 
       return event({
-        event_id: editEvent.event_id,
-        event_name: eventTitle,
+        id: editEvent.id,
+        title: eventTitle,
         from_date: fromDate,
         to_date: toDate,
-        event_description: eventDescription,
-        event_color: eventColor
+        description: eventDescription,
+        color: eventColor
       })
     }
   }
@@ -143,7 +143,7 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
           <ModalWrapper>
             <ModalContainer>
               <ModalHeader>
-                {editEvent.event_id && (
+                {editEvent.id && (
                   <DeleteButton
                     onClick={() => setIsConfirmModalOpen(!isConfimModalOpen)}
                   >
@@ -191,7 +191,7 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
                       <ConfirmCancelButtonText>Cancel</ConfirmCancelButtonText>
                     </ConfirmCancelButton>
                     <ConfirmDeleteButton
-                      onClick={() => onClickConfirmDelete(editEvent.event_id)}
+                      onClick={() => onClickConfirmDelete(editEvent.id)}
                     >
                       <ConfirmDeleteButtonText>Delete</ConfirmDeleteButtonText>
                     </ConfirmDeleteButton>
