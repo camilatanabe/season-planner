@@ -92,13 +92,13 @@ const Calendar = ({ selectedDate, daySchedule, events }) => {
             key={day}
             onClick={() => onDateClick(dateFns.toDate(cloneDay))}
           >
-            {dayEvents.map((event, index) => {
-              while (dateFns.format(cloneDay, 'yyyy-MM-dd') <= event.to_date) {
-                return (
-                  <Events key={index} top={2 + event.id} color={event.color} />
-                )
-              }
-            })}
+            {dayEvents
+              .filter(
+                event => dateFns.format(cloneDay, 'yyyy-MM-dd') <= event.to_date
+              )
+              .map((event, index) => (
+                <Events key={index} top={2 + event.id} color={event.color} />
+              ))}
             <NumberCell selected={isSelected}>{formattedDate}</NumberCell>
             <BgCell selected={isSelected}>{formattedDate}</BgCell>
           </CalendarDaysColumn>
