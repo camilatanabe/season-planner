@@ -15,7 +15,7 @@ A simple calendar application to manage your events and appointments and help or
 - [x] User can create event
 - [x] User can edit event
 - [x] User can delete event
-- [ ] View events for the current day
+- [x] View events for the current day
 - [ ] Show an animation on calendar by season
 
 ---

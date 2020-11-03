@@ -9,6 +9,7 @@ import {
   Day,
   Month,
   AddButton,
+  EventsContainer,
   EventCard,
   EventText
 } from './styles'
@@ -44,16 +45,18 @@ const MainPage = () => {
       <Drawer>
         <Day>{formattedDay}</Day>
         <Month>{formattedMonth}</Month>
-        {eventsDay.length > 0 &&
-          eventsDay.map((event, index) => (
-            <EventCard
-              key={index}
-              onClick={() => onClickEditEvent(event.id)}
-              color={event.color}
-            >
-              <EventText>{event.title}</EventText>
-            </EventCard>
-          ))}
+        <EventsContainer>
+          {eventsDay.length > 0 &&
+            eventsDay.map((event, index) => (
+              <EventCard
+                key={index}
+                onClick={() => onClickEditEvent(event.id)}
+                color={event.color}
+              >
+                <EventText>{event.title}</EventText>
+              </EventCard>
+            ))}
+        </EventsContainer>
       </Drawer>
     )
   }
