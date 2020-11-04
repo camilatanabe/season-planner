@@ -10,7 +10,7 @@ export const CalendarContainer = styled.div`
   width: 90%;
   background: white;
   border: 1px solid lightgray;
-  height: auto;
+  height: 100%;
   margin: 0 auto;
 `
 
@@ -133,7 +133,7 @@ export const BgCell = styled.span`
 export const Events = styled.div`
   position: absolute;
   width: 100%;
-  background-color: green;
-  padding: 0.2em;
+  background-color: ${props => props.color};
+  padding: 0.1em;
   top: ${props => props.top}em;
 `

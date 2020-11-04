@@ -22,12 +22,14 @@ export const Drawer = styled.div`
 `
 
 export const Day = styled.p`
-  font-size: 26px;
+  font-size: 3em;
+  margin: 0;
 `
 
 export const Month = styled.p`
   font-size: 20px;
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 3em;
 `
 
 export const AddButton = styled.button`
@@ -41,12 +43,38 @@ export const AddButton = styled.button`
   }
 `
 
+export const EventsContainer = styled.div`
+  width: 100%;
+  height: 25rem;
+  overflow: auto;
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: #f5f5f5;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #9e9e9e;
+  }
+`
+
 export const EventCard = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
-  height: 45px;
-  padding: 10px;
+  height: 4rem;
+  padding-left: 10px;
   cursor: pointer;
+  border-left: 0.3em solid ${props => props.color};
+  margin-bottom: 3em;
+`
+
+export const EventText = styled.p`
+  margin: 0;
+  font-size: 1.1em;
 `

@@ -9,7 +9,9 @@ import {
   Day,
   Month,
   AddButton,
-  EventCard
+  EventsContainer,
+  EventCard,
+  EventText
 } from './styles'
 import { Add } from '@styled-icons/material'
 
@@ -43,15 +45,18 @@ const MainPage = () => {
       <Drawer>
         <Day>{formattedDay}</Day>
         <Month>{formattedMonth}</Month>
-        {eventsDay.length > 0 &&
-          eventsDay.map((event, index) => (
-            <EventCard
-              key={index}
-              onClick={() => onClickEditEvent(event.event_id)}
-            >
-              <p>{event.event_name}</p>
-            </EventCard>
-          ))}
+        <EventsContainer>
+          {eventsDay.length > 0 &&
+            eventsDay.map((event, index) => (
+              <EventCard
+                key={index}
+                onClick={() => onClickEditEvent(event.id)}
+                color={event.color}
+              >
+                <EventText>{event.title}</EventText>
+              </EventCard>
+            ))}
+        </EventsContainer>
       </Drawer>
     )
   }
@@ -63,19 +68,19 @@ const MainPage = () => {
 
   const onClickEditEvent = eventId => {
     setIsEventModalOpen(!isEventModalOpen)
-    const foundIndex = events.find(x => x.event_id === eventId)
+    const foundIndex = events.find(x => x.id === eventId)
     setEditEvent(foundIndex)
   }
 
   const onClickDeleteEvent = eventId => {
-    const newEventsArray = events.filter(x => x.event_id !== eventId)
+    const newEventsArray = events.filter(x => x.id !== eventId)
     setIsEventModalOpen(!isEventModalOpen)
 
     return setEvents(newEventsArray)
   }
 
   const onSubmitEvent = eventData => {
-    const foundIndex = events.findIndex(x => x.event_id === eventData.event_id)
+    const foundIndex = events.findIndex(x => x.id === eventData.id)
 
     if (foundIndex > -1) {
       return (events[foundIndex] = eventData)
