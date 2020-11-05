@@ -5,6 +5,8 @@ import {
   ModalWrapper,
   ModalContainer,
   ModalHeader,
+  SaveButtonContainer,
+  SaveButton,
   CloseButton,
   DeleteButton,
   Input,
@@ -157,26 +159,28 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
               <form onSubmit={handleSubmit}>
                 <label>
                   Event Title:
-                  <Input {...bindEventTitle} />
+                  <Input required {...bindEventTitle} />
                 </label>
                 <label>
                   From:
-                  <DatePickerInput {...bindFromDate} />
+                  <DatePickerInput required {...bindFromDate} />
                 </label>
                 <label>
                   To:
-                  <DatePickerInput {...bindToDate} min={fromDate} />
+                  <DatePickerInput required {...bindToDate} min={fromDate} />
                 </label>
                 <label>
                   Event Description:
-                  <Input {...bindEventDescription} />
+                  <Input required {...bindEventDescription} />
                 </label>
                 <label>
                   Select a color to event{' '}
-                  <input type="color" {...bindEventColor} />
+                  <input type="color" required {...bindEventColor} />
                 </label>
                 <br></br>
-                <input type="submit" value="Save" />
+                <SaveButtonContainer>
+                  <SaveButton type="submit" value="Save" />
+                </SaveButtonContainer>
               </form>
             </ModalContainer>
           </ModalWrapper>
