@@ -77,7 +77,7 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
     value: eventColor,
     bind: bindEventColor,
     reset: resetEventColor
-  } = useInput(editEvent.id ? editEvent.color : '#00ff00')
+  } = useInput(editEvent.id ? editEvent.color : '#82E0AA')
 
   const isValid = () => {
     if (!eventTitle) {
