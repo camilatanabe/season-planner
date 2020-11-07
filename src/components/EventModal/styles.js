@@ -134,7 +134,7 @@ export const DeleteIcon = styled(Delete)`
   }
 `
 
-export const SaveButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `
@@ -144,11 +144,6 @@ export const SaveButton = styled.input`
   margin: 20px;
   background-color: #ffffff;
   border-color: #f0f0f0;
-`
-
-export const ConfirmModalButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
 `
 
 export const ConfirmCancelButton = styled.button`

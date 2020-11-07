@@ -5,7 +5,7 @@ import {
   ModalWrapper,
   ModalContainer,
   ModalHeader,
-  SaveButtonContainer,
+  ButtonContainer,
   SaveButton,
   CloseButton,
   DeleteButton,
@@ -16,7 +16,6 @@ import {
   ConfirmModalContainer,
   CloseIcon,
   DeleteIcon,
-  ConfirmModalButtonContainer,
   ConfirmCancelButton,
   ConfirmDeleteButton,
   ConfirmCancelButtonText,
@@ -178,9 +177,9 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
                   <input type="color" required {...bindEventColor} />
                 </label>
                 <br></br>
-                <SaveButtonContainer>
+                <ButtonContainer>
                   <SaveButton type="submit" value="Save" />
-                </SaveButtonContainer>
+                </ButtonContainer>
               </form>
             </ModalContainer>
           </ModalWrapper>
@@ -190,7 +189,7 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
               <ConfirmModalWrapper>
                 <ConfirmModalContainer>
                   <p>Are you sure?</p>
-                  <ConfirmModalButtonContainer>
+                  <ButtonContainer>
                     <ConfirmCancelButton onClick={onClickCloseConfirmModal}>
                       <ConfirmCancelButtonText>Cancel</ConfirmCancelButtonText>
                     </ConfirmCancelButton>
@@ -199,7 +198,7 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
                     >
                       <ConfirmDeleteButtonText>Delete</ConfirmDeleteButtonText>
                     </ConfirmDeleteButton>
-                  </ConfirmModalButtonContainer>
+                  </ButtonContainer>
                 </ConfirmModalContainer>
               </ConfirmModalWrapper>
             </React.Fragment>
