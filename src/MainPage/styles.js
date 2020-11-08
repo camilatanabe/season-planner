@@ -8,7 +8,7 @@ export const Container = styled.div`
 
 export const Header = styled.div`
   display: flex;
-  padding: 30px;
+  padding: 2em;
   justify-content: flex-end;
 `
 
@@ -17,7 +17,7 @@ export const Drawer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 40%;
-  padding-left: 40px;
+  padding-left: 3em;
   margin-left: 5%;
 `
 
@@ -27,7 +27,7 @@ export const Day = styled.p`
 `
 
 export const Month = styled.p`
-  font-size: 20px;
+  font-size: 1.5em;
   margin-top: 0;
   margin-bottom: 3em;
 `
@@ -45,7 +45,7 @@ export const AddButton = styled.button`
 
 export const EventsContainer = styled.div`
   width: 100%;
-  height: 25rem;
+  height: 25em;
   overflow: auto;
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -67,7 +67,7 @@ export const EventCard = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 4rem;
+  height: 4em;
   padding-left: 10px;
   cursor: pointer;
   border-left: 0.3em solid ${props => props.color};
