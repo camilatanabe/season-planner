@@ -156,26 +156,26 @@ const EventModal = ({ isOpen, hide, event, editEvent, deleteEvent }) => {
                 </CloseButton>
               </ModalHeader>
               <form onSubmit={handleSubmit}>
-                <label>
-                  Event Title:
+                <div>
+                  <label>Event Title:</label>
                   <Input required {...bindEventTitle} />
-                </label>
-                <label>
-                  From:
+                </div>
+                <div>
+                  <label>From:</label>
                   <DatePickerInput required {...bindFromDate} />
-                </label>
-                <label>
-                  To:
+                </div>
+                <div>
+                  <label>To:</label>
                   <DatePickerInput required {...bindToDate} min={fromDate} />
-                </label>
-                <label>
-                  Event Description:
+                </div>
+                <div>
+                  <label>Event Description: </label>
                   <Input required {...bindEventDescription} />
-                </label>
-                <label>
-                  Select a color to event{' '}
+                </div>
+                <div>
+                  <label>Select a color to event </label>
                   <input type="color" required {...bindEventColor} />
-                </label>
+                </div>
                 <br></br>
                 <ButtonContainer>
                   <SaveButton type="submit" value="Save" />
